@@ -1,6 +1,6 @@
 # Manim Examples
 
-A collection of manim examples relating to trial designs to modify/use.
+A collection of manim examples relating to trial designs to modify/use. Outputs are shown in /Videos
 
 ## Manim Installation
 
@@ -95,7 +95,7 @@ class BoundaryAnimation(Scene):
         self.wait(2)
 ```
 
-The format for running the animations takes the form of flag + fileName.py + SceneName
+The format for running the animations is flag + fileName.py + SceneName
 To run the animation, in the terminal type
 
 ```bash
@@ -103,3 +103,5 @@ manim -pql gsd-boundary.py BoundaryAnimation
 ```
 
 Where `-p` is the flag to tell manim to play the scene once rendered and the `-ql` flag is for low quality. If you want higher quality (which will increase the time to output), use `-pqh`.
+
+![Manim Boundary Animation](/Images/Boundary_example.JPG)
