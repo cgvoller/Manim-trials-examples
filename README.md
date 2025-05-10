@@ -2,6 +2,11 @@
 
 A collection of manim examples relating to trial designs to modify/use. Outputs are shown in /Videos
 
+Current Animations:
+
+- Group sequential Boundary
+- 3+3 Dose escalation
+
 ## Manim Installation
 
 See the documentation here for installation instructions:
@@ -9,7 +14,9 @@ See the documentation here for installation instructions:
 https://docs.manim.community/en/stable/
 
 
-## Example Boundary Animation
+## Example Previews
+
+### Boundary Animation
 
 ```python
 class BoundaryAnimation(Scene):
@@ -102,6 +109,11 @@ To run the animation, in the terminal type
 manim -pql gsd-boundary.py BoundaryAnimation
 ```
 
-Where `-p` is the flag to tell manim to play the scene once rendered and the `-ql` flag is for low quality. If you want higher quality (which will increase the time to output), use `-pqh`.
+Where `-p` is the flag to tell manim to play the scene once rendered and the `-ql` flag is for low quality. If you want higher quality (which will increase the time to output), use `-pqh`. A useful extension if you're using vscode is 'Manim Sideview' which provides live previews of videos.
 
 ![Manim Boundary Animation](/Images/Boundary_example.JPG)
+
+
+### 3+3 Dose Escalation
+
+![Manim Dose Escalation](/Images/threeplusthreedoseesc.JPG)
