@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+*.log
+.vscode/
+.env/
+.idea/
+.DS_Store
+media/
+output/
