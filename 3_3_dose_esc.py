@@ -73,7 +73,7 @@ class ThreePlusThree(Scene):
         positions = [0.25, 0.5, 0.75]
         dots = VGroup()
         for x in positions:
-            # c2p(x, y) converts (x,y) in data coords → scene coords
+            # c2p(x, y) converts (x,y) in data coords -> scene coords
             dot = Dot(
                 point=axes.c2p(x, 0.5),
                 radius=0.20, 
@@ -145,7 +145,7 @@ class ThreePlusThree(Scene):
 # Fourth cohort at y=3.5 between x=3 and x=4
         fourth_positions = [3.55, 3.80, 4.05]
         fourth_dots = VGroup()
-        colors = [GREEN, RED, RED]  # Two reds
+        colors = [GREEN, GREEN, GREEN] 
         for x, color in zip(fourth_positions, colors):
             dot = Dot(point=axes.c2p(x, 2.5), radius=0.20, color=color)
             self.play(FadeIn(dot), run_time=0.5)
@@ -169,8 +169,9 @@ class ThreePlusThree(Scene):
 # Fifth Cohort
         fifth_positions = [4.35, 4.6, 4.85]
         fifth_dots = VGroup()
-        for x in fifth_positions:
-            dot = Dot(point=axes.c2p(x, 3.5), radius=0.20, color=GREEN)
+        colors = [GREEN, RED, RED] # Two red
+        for x, color in zip(fifth_positions, colors):
+            dot = Dot(point=axes.c2p(x, 3.5), radius=0.20, color=color)
             self.play(FadeIn(dot), run_time=0.5)
             self.wait(0.2)
             fifth_dots.add(dot)
