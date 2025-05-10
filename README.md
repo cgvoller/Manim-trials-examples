@@ -2,11 +2,13 @@
 
 A collection of manim examples relating to trial designs to modify/use. Outputs are shown in /Videos
 
-Current Animations:
+## Table of Contents
 
-- Group sequential Boundary
-- 3+3 Dose escalation
-
+* [Installation](#Manim-Installation)
+* [Examples](#Example-Previews)
+    * [Group Sequential Trial](#Boundary-Animation)
+    * [Dose Escalation Design](#3+3-Dose-Escalation)
+    * [Simple Randomisation](#simple-randomisation)
 ## Manim Installation
 
 See the documentation here for installation instructions:
@@ -17,6 +19,8 @@ https://docs.manim.community/en/stable/
 ## Example Previews
 
 ### Boundary Animation
+
+Animation of a group-sequential trial with 5 analyses with stopping for futility and efficacy.
 
 ```python
 class BoundaryAnimation(Scene):
@@ -116,4 +120,12 @@ Where `-p` is the flag to tell manim to play the scene once rendered and the `-q
 
 ### 3+3 Dose Escalation
 
+Standard 3 + 3 dose escalation study design.
+
 ![Manim Dose Escalation](/Images/threeplusthreedoseesc.JPG)
+
+### Simple Randomisation
+
+Simple, equal randomisation with N=10 and N=20 urn style.
+
+![Simple Randomisation](/Images/simple_randomisation.JPG)
