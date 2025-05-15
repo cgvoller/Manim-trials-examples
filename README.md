@@ -115,36 +115,23 @@ manim -pql gsd-boundary.py BoundaryAnimation
 
 Where `-p` is the flag to tell manim to play the scene once rendered and the `-ql` flag is for low quality. If you want higher quality (which will increase the time to output), use `-pqh`. A useful extension if you're using vscode is 'Manim Sideview' which provides live previews of videos.
 
-<video width="640" controls>
-  <source src="https://cgvoller.github.io/videos/BoundaryAnimation.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+[![Watch the video](Images/Boundary_example.JPG)](https://cgvoller.github.io/videos/BoundaryAnimation.mp4)
 
 
 ### Urn
 
 Urn based randomisation
 
-<video width="640" controls>
-  <source src="https://cgvoller.github.io/videos/DrawUrn.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
-
+[![Watch the video](Images/Urn.JPG)](https://cgvoller.github.io/videos/DrawUrn.mp4)
 
 ### 3+3 Dose Escalation
 
 Standard 3 + 3 dose escalation study design.
 
-<video width="640" controls>
-  <source src="https://cgvoller.github.io/videos/ThreePlusThree.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+[![Watch the video](Images/threeplusthreedoseesc.JPG)](https://cgvoller.github.io/videos/ThreePlusThree.mp4)
 
 ### Simple Randomisation
 
 Simple, equal randomisation with N=10 and N=20 urn style.
 
-<video width="640" controls>
-  <source src="https://cgvoller.github.io/videos/SimpleRandomisation.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+[![Watch the video](Images/simple_randomisation.JPG)](https://cgvoller.github.io/videos/SimpleRandomisation.mp4)
