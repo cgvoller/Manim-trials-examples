@@ -7,8 +7,8 @@ A collection of manim examples relating to trial designs to modify/use. Outputs 
 * [Installation](#Manim-Installation)
 * [Examples](#Example-Previews)
     * [Group Sequential Trial](#Boundary-Animation)
-    * [Urn Randomisation](#Urn)
-    * [Dose Escalation Design](#3+3-Dose-Escalation)
+    * [Urn Randomisation](#urn)
+    * [Dose Escalation Design](#33-dose-escalation)
     * [Simple Randomisation](#simple-randomisation)
 ## Manim Installation
 
