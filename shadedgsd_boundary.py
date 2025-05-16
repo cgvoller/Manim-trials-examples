@@ -1,38 +1,15 @@
-# Manim Examples
-
-A collection of manim examples relating to trial designs to modify/use. Outputs are shown in /Videos
-
-## Table of Contents
-
-* [Installation](#Manim-Installation)
-* [Examples](#Example-Previews)
-    * [Group Sequential Trial](#Boundary-Animation)
-    * [Shaded GSD](#shaded-boundary-animation)
-    * [Multi-Arm Multi-Stage](#multi-arm-multi-stage-mams)
-    * [Urn Randomisation](#urn)
-    * [Dose Escalation Design](#33-dose-escalation)
-    * [Simple Randomisation](#simple-randomisation)
-## Manim Installation
-
-See the documentation here for installation instructions:
-
-https://docs.manim.community/en/stable/
+from manim import *
+import numpy as np
 
 
-## Example Previews
-
-### Boundary Animation
-
-Animation of a group-sequential trial with 5 analyses with stopping for futility or efficacy.
-
-```python
-class BoundaryAnimation(Scene):
+class ShadedBoundaryAnimation(Scene):
     def construct(self):
         # Define k values and boundaries (boundaries start at k=1)
         k_values = np.array([0, 1, 2, 3, 4, 5])
         a_crit = np.array([-1.61511306, -0.07126633, 0.81610852, 1.46393433, 1.986610])  # No k=0 boundary
         b_crit = np.array([4.442196, 3.141107, 2.564703, 2.221098, 1.986610])  # No k=0 boundary
-
+        a_crit_ext = np.insert(a_crit, 0, a_crit[0])
+        b_crit_ext = np.insert(b_crit, 0, b_crit[0])
         # Observed paths (starting from k=0, y=0)
         observed_red_cross = np.array([0, 1.5, 2.3, 2.7, 4.5])  # Crosses upper boundary
         observed_green_cross = np.array([0, -1.2, -1.8, -2.2, -2.5])  # Crosses lower boundary
@@ -68,6 +45,71 @@ class BoundaryAnimation(Scene):
         accept_text = MathTex(r"\text{Accept } H_0", font_size=24)
         accept_text.move_to(axes.c2p(3, a_crit[2]) + DOWN * 0.4)
         self.play(Write(accept_text))
+
+
+        
+        upper_curve = axes.plot_line_graph(
+            x_values=k_values[1:], y_values=b_crit,
+            add_vertex_dots=False, line_color=RED, stroke_width=0  # Invisible curve
+        )
+
+        lower_curve = axes.plot_line_graph(
+            x_values=k_values[1:], y_values=a_crit,
+            add_vertex_dots=False, line_color=GREEN, stroke_width=0  # Invisible curve
+        )
+        fill_tracker = ValueTracker(0.0)
+
+        def get_blue_region():
+            lower_points = [axes.c2p(x, a) for x, a in zip(k_values[1:], a_crit)]
+            upper_points = [axes.c2p(x, a + (b - a) * fill_tracker.get_value())
+                    for x, a, b in zip(k_values[1:], a_crit, b_crit)]
+            return Polygon(*lower_points, *reversed(upper_points),
+                   color=BLUE, fill_opacity=0.1, stroke_opacity=0)
+
+        blue_region = always_redraw(get_blue_region)
+        self.add(blue_region)
+
+        def get_left_blue_strip():
+            top_y = axes.y_range[1]
+            bottom_y = axes.y_range[0]
+            k0 = 0
+            k1 = 1
+            return Polygon(
+                axes.c2p(k0, bottom_y),
+                axes.c2p(k1, bottom_y),
+                axes.c2p(k1, bottom_y + (top_y - bottom_y) * fill_tracker.get_value()),
+                axes.c2p(k0, bottom_y + (top_y - bottom_y) * fill_tracker.get_value()),
+                color=BLUE, fill_opacity=0.1, stroke_opacity=0
+            )
+
+        left_blue_strip = always_redraw(get_left_blue_strip)
+        self.add(left_blue_strip)
+
+        def get_red_region():
+            top_y = axes.y_range[1]
+            upper_points = [axes.c2p(x, b) for x, b in zip(k_values[1:], b_crit)]
+            top_points = [axes.c2p(x, b + (top_y - b) * fill_tracker.get_value())
+                  for x, b in zip(k_values[1:], b_crit)]
+            return Polygon(*upper_points, *reversed(top_points),
+                   color=RED, fill_opacity=0.2, stroke_opacity=0)
+
+        red_region = always_redraw(get_red_region)
+        self.add(red_region)
+
+        def get_green_region():
+            bottom_y = axes.y_range[0]
+            lower_points = [axes.c2p(x, a) for x, a in zip(k_values[1:], a_crit)]
+            bottom_points = [axes.c2p(x, a + (bottom_y - a) * fill_tracker.get_value())
+                     for x, a in zip(k_values[1:], a_crit)]
+            return Polygon(*lower_points, *reversed(bottom_points),
+                   color=GREEN, fill_opacity=0.2, stroke_opacity=0)
+
+        green_region = always_redraw(get_green_region)
+        self.add(green_region)
+        # Add shaded regions in the correct back-to-front order
+        #self.add(red_region, green_region, blue_region)
+        self.play(fill_tracker.animate.set_value(1.0), run_time=2)
+
 
         # Function to animate each scenario
         def animate_path(observed_values):
@@ -107,46 +149,4 @@ class BoundaryAnimation(Scene):
         animate_path(observed_no_cross)  # Scenario 3: Stays blue
 
         self.wait(2)
-```
 
-The format for running the animations is flag + fileName.py + SceneName
-To run the animation, in the terminal type
-
-```bash
-manim -pql gsd-boundary.py BoundaryAnimation
-```
-
-Where `-p` is the flag to tell manim to play the scene once rendered and the `-ql` flag is for low quality. If you want higher quality (which will increase the time to output), use `-pqh`. A useful extension if you're using vscode is 'Manim Sideview' which provides live previews of videos.
-
-[![Watch the video](Images/Boundary_example.JPG)](https://cgvoller.github.io/videos/BoundaryAnimation.mp4)
-
-
-### Shaded Boundary Animation
-
-Group sequential trial with animated shaded regions
-
-[![Watch the video](Images/ShadedBoundary.JPG)](https://cgvoller.github.io/videos/ShadedBoundaryAnimation.mp4)
-
-### Multi-Arm Multi-Stage (MAMS)
-
-MAMS Design
-
-[![Watch the video](Images/MAMS.JPG)](https://cgvoller.github.io/videos/MAMS.mp4)
-
-### Urn
-
-Urn based randomisation
-
-[![Watch the video](Images/Urn.JPG)](https://cgvoller.github.io/videos/DrawUrn.mp4)
-
-### 3+3 Dose Escalation
-
-Standard 3 + 3 dose escalation study design.
-
-[![Watch the video](Images/threeplusthreedoseesc.JPG)](https://cgvoller.github.io/videos/ThreePlusThree.mp4)
-
-### Simple Randomisation
-
-Simple, equal randomisation with N=10 and N=20 urn style.
-
-[![Watch the video](Images/simple_randomisation.JPG)](https://cgvoller.github.io/videos/SimpleRandomisation.mp4)
