@@ -7,6 +7,7 @@ A collection of manim examples relating to trial designs to modify/use. Outputs 
 * [Installation](#Manim-Installation)
 * [Examples](#Example-Previews)
     * [Group Sequential Trial](#Boundary-Animation)
+    * [Multi-Arm Multi-Stage](#multi-arm-multi-stage-mams)
     * [Urn Randomisation](#urn)
     * [Dose Escalation Design](#33-dose-escalation)
     * [Simple Randomisation](#simple-randomisation)
@@ -118,6 +119,12 @@ Where `-p` is the flag to tell manim to play the scene once rendered and the `-q
 
 [![Watch the video](Images/Boundary_example.JPG)](https://cgvoller.github.io/videos/BoundaryAnimation.mp4)
 
+
+### Multi-Arm Multi-Stage (MAMS)
+
+MAMS Design
+
+[![Watch the video](Images/MAMS.JPG)](https://cgvoller.github.io/videos/MAMS.mp4)
 
 ### Urn
 
